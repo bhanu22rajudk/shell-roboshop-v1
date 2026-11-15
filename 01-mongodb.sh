@@ -27,7 +27,9 @@ validate(){
 }
 
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+##cp mongo.repo /etc/yum.repos.d/mongo.repo
+SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
+cp "$SCRIPT_DIR/mongo.repo" /etc/yum.repos.d/mongo.repo
 validate $? "Adding mongo repo"
 
 dnf install mongodb-org -y &>> $logs_file
