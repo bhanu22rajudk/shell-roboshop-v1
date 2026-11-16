@@ -61,8 +61,17 @@ validate $? "Unzipping catalogue"
 npm install &>> $logs_file
 validate $? "Installing dependencies"
 
-sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/catalogue.service"
-cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service
+# sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/catalogue.service"
+# cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service
+
+cp "$scripts_dir/catalogue.service" /tmp/catalogue.service
+validate $? "Copying catalogue service template"
+
+sed -i "s/DOMAIN_NAME/$domain_name/g" /tmp/catalogue.service
+validate $? "Updating domain name in catalogue service"
+
+cp /tmp/catalogue.service /etc/systemd/system/catalogue.service
+validate $? "Copying catalogue service to systemd"
 
 # systemctl daemon-reload &>> $logs_file
 # systemctl enable catalogue &>> $logs_file
