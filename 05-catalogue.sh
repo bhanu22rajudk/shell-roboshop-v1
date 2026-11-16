@@ -67,8 +67,8 @@ validate $? "Installing dependencies"
 cp "$scripts_dir/catalogue.service" /tmp/catalogue.service
 validate $? "Copying catalogue service template"
 
-# sed -i "s/DOMAIN_NAME/$domain_name/g" /tmp/catalogue.service
-# validate $? "Updating domain name in catalogue service"
+sed -i "s/DOMAIN_NAME/$domain_name/g" /tmp/catalogue.service
+validate $? "Updating domain name in catalogue service"
 
 # cp /tmp/catalogue.service /etc/systemd/system/catalogue.service
 # validate $? "Copying catalogue service to systemd"
